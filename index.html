@@ -1447,16 +1447,40 @@ window._fetchTimeout = async function(url, ms){
 .pre-rem-all { display: flex; align-items: center; gap: 8px; color: #cfcfcf; font-size: 13px; margin-top: 14px; }
 .pre-rem-all input { width: 18px; height: 18px; accent-color: #e5b847; }
 .pre-rem-grid.three { grid-template-columns: repeat(3, 1fr); }
+/* ===== مینیوی ڕێکخستن — پڕ بە شاشە ===== */
+#settingsModal .settings-menu-box { min-height: 80vh; display: flex; flex-direction: column; }
+#settingsModal .set-menu-head { flex: 1; display: flex; flex-direction: column; padding: 22px 18px 28px !important; }
+#settingsModal .set-menu-head h3 { font-size: 21px !important; margin: 4px 0 28px !important; }
+#settingsModal .set-menu-list { flex: 1; justify-content: space-evenly; gap: 22px !important; }
+#settingsModal .set-menu-list > button {
+    padding: 24px 20px !important; border-radius: 24px !important; gap: 18px !important;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: transform .15s, box-shadow .15s !important;
+}
+#settingsModal .set-menu-list > button:active { transform: scale(0.97); }
+#settingsModal .set-menu-list > button > div:first-child { width: 70px !important; height: 70px !important; border-radius: 22px !important; }
+#settingsModal .set-menu-list > button img { width: 38px !important; height: 38px !important; }
+#settingsModal .set-menu-list > button > div:last-child > div:first-child { font-size: 18px !important; }
+#settingsModal .set-menu-list > button > div:last-child > div:last-child { font-size: 13.5px !important; margin-top: 6px !important; }
+#settingsModal .set-menu-list > button::after { content: '❮'; font-size: 20px; line-height: 1; color: rgba(229,184,71,0.75); flex-shrink: 0; }
+/* ===== بانگی درێژ / کورت ===== */
+.adhan-len-group { display: inline-flex; background: rgba(255,255,255,0.06); border-radius: 12px; padding: 2px; gap: 2px; width: max-content; }
+.adhan-len-btn {
+    border: none; border-radius: 10px; padding: 3px 12px; font-family: inherit; font-size: 11.5px; font-weight: 700;
+    background: transparent; color: #9a9a9a; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.adhan-len-btn.on { background: var(--gold, #e5b847); color: #0A0C12; }
 /* ===== دوگمەی بیرخستنەوە لە سەرەوە (تەنیشت کاتژمێر) ===== */
 .hdr-rem-btn {
-    position: relative; width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%;
+    position: relative; width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%;
     display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
-    font-size: 15px; border: 1px solid rgba(229,184,71,0.55); background: rgba(229,184,71,0.14);
+    font-size: 23px; border: none; background: linear-gradient(135deg, var(--gold, #e5b847), #C99C2E);
+    box-shadow: 0 2px 10px rgba(229,184,71,0.5);
     -webkit-tap-highlight-color: transparent; touch-action: manipulation; padding: 0;
 }
-.hdr-rem-btn.on { background: linear-gradient(135deg, var(--gold, #e5b847), #C99C2E); border-color: transparent; box-shadow: 0 2px 8px rgba(229,184,71,0.5); }
+.hdr-rem-btn:active { transform: scale(0.94); }
 .hdr-rem-btn .hdr-rem-dot {
-    position: absolute; top: -1px; right: -1px; width: 9px; height: 9px; border-radius: 50%;
+    position: absolute; top: 0; right: 0; width: 11px; height: 11px; border-radius: 50%;
     background: #3cb55e; border: 1.5px solid #0F111C; display: none;
 }
 .hdr-rem-btn.on .hdr-rem-dot { display: block; }
@@ -1580,9 +1604,9 @@ window._fetchTimeout = async function(url, ms){
 
       <!-- ڕیزی یەکەم: کاتی گەورە لە ناوەڕاست + بانگبیژ لە ڕاست -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin:0 0 4px;gap:8px;">
-        <button class="hdr-rem-btn" id="headerRemBtn" onclick="window.openPreReminder && window.openPreReminder(99)" aria-label="بیرخستنەوە">⏰<span class="hdr-rem-dot"></span></button>
+        <div style="width:44px;flex-shrink:0;"></div>
         <div class="time" id="clock" style="font-size:36px;font-weight:800;color:#FFE066;letter-spacing:-1px;direction:ltr;line-height:1;text-shadow:0 0 22px rgba(255,224,102,0.4);flex:1;text-align:center;">10:36</div>
-        <button class="bell-btn-large" id="activate-bell" style="width:30px;height:30px;font-size:15px;flex-shrink:0;">🔔</button>
+        <button class="hdr-rem-btn" id="headerRemBtn" onclick="window.openPreReminder && window.openPreReminder(99)" aria-label="بیرخستنەوە">⏰<span class="hdr-rem-dot"></span></button>
       </div>
       <!-- ڕیزی دووەم: نوێژی داهاتوو لە خوارەوەی کاتەکە -->
       <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:4px;">
@@ -2079,15 +2103,15 @@ window._fetchTimeout = async function(url, ms){
 </div>
 </div></div>
 <div id="settingsModal" class="modal-overlay">
-<div class="modal-box" style="padding:0;overflow:hidden;border-radius:24px;max-width:480px;width:95%;">
+<div class="modal-box settings-menu-box" style="padding:0;overflow:hidden;border-radius:24px;max-width:480px;width:95%;">
 
 <!-- هێدەری ڕێکخستن -->
-<div style="background:linear-gradient(135deg,#1a1d2e,#12141f);padding:18px 16px 16px;position:relative;">
+<div class="set-menu-head" style="background:linear-gradient(135deg,#1a1d2e,#12141f);padding:18px 16px 16px;position:relative;">
   <button class="modal-close" onclick="closeModal('settingsModal')" style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,0.08);border:none;width:30px;height:30px;border-radius:50%;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
   <h3 id="settingsModalTitle" style="margin:0 0 16px;font-size:17px;color:#E5B847;font-weight:800;text-align:center;">⚙️ ڕێکخستن</h3>
 
   <!-- ٣ دوگمەی ستونی -->
-  <div style="display:flex;flex-direction:column;gap:10px;">
+  <div class="set-menu-list" style="display:flex;flex-direction:column;gap:10px;">
 
     <button id="tab-btn-langtime" onclick="openSubSettings('langtime')" style="display:flex;flex-direction:row;align-items:center;gap:16px;padding:14px 20px;background:linear-gradient(135deg,rgba(229,184,71,0.15),rgba(229,184,71,0.05));border:1.5px solid rgba(229,184,71,0.4);border-radius:20px;cursor:pointer;transition:0.2s;font-family:inherit;width:100%;">
       <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#E5B847,#c9982b);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(229,184,71,0.35);flex-shrink:0;">
@@ -2105,7 +2129,7 @@ window._fetchTimeout = async function(url, ms){
       </div>
       <div style="text-align:right;flex:1;">
         <div style="font-size:15px;font-weight:800;color:#fef3c7;line-height:1.3;">دەنگی بانگبیژ</div>
-        <div style="font-size:12px;color:#fbbf24;margin-top:3px;">مەکە · رالد · پێشەوا</div>
+        <div style="font-size:12px;color:#fbbf24;margin-top:3px;">٥ بانگبێژ · درێژ و کورت</div>
       </div>
     </button>
 
@@ -2177,64 +2201,84 @@ window._fetchTimeout = async function(url, ms){
     <div style="font-size:11px;color:#888;margin-bottom:10px;">▶ کلیک بکە بۆ گوێستنەوە · دووگمەی چالاككردن بۆ هەڵبژاردن</div>
     <audio id="adhanPreviewPlayer" style="display:none;"></audio>
     <div style="display:flex;flex-direction:column;gap:8px;">
-      <div id="adhan-row-makha" style="display:flex;align-items:center;justify-content:space-between;border-radius:14px;padding:10px 12px;background:rgba(229,184,71,0.1);">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div id="adhan-dot-makha" style="width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:var(--gold);flex-shrink:0;"></div>
-          <span style="font-size:14px;">بانگی مەکە</span>
+      <div id="adhan-row-makha" style="display:flex;align-items:center;justify-content:space-between;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,0.03);">
+        <div style="display:flex;align-items:center;gap:10px;min-width:0;">
+          <div id="adhan-dot-makha" style="width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:transparent;flex-shrink:0;"></div>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+            <span style="font-size:14px;">بانگی مەکە</span>
+            <div class="adhan-len-group">
+              <button type="button" class="adhan-len-btn" id="adhan-len-makha-long" onclick="selectAdhanLen('makha','long')">درێژ</button>
+              <button type="button" class="adhan-len-btn" id="adhan-len-makha-short" onclick="selectAdhanLen('makha','short')">کورت</button>
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:6px;">
-          <button id="adhan-play-makha" onclick="previewAdhan('makha')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
-          <button onclick="selectAdhan('makha')" id="adhan-sel-makha" style="background:var(--gold);border:none;border-radius:20px;padding:6px 12px;color:#0A0C12;font-family:inherit;cursor:pointer;font-size:12px;font-weight:700;">✓ هەڵبژێردراو</button>
+        <div style="display:flex;gap:6px;flex-shrink:0;">
+          <button id="adhan-play-makha" onclick="previewAdhanRow('makha')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
+          <button onclick="selectAdhanRow('makha')" id="adhan-sel-makha" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
         </div>
       </div>
       <div id="adhan-row-rald" style="display:flex;align-items:center;justify-content:space-between;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,0.03);">
-        <div style="display:flex;align-items:center;gap:10px;">
+        <div style="display:flex;align-items:center;gap:10px;min-width:0;">
           <div id="adhan-dot-rald" style="width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:transparent;flex-shrink:0;"></div>
-          <span style="font-size:14px;">بانگی رعد</span>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+            <span style="font-size:14px;">بانگی رعد</span>
+            <div class="adhan-len-group">
+              <button type="button" class="adhan-len-btn" id="adhan-len-rald-long" onclick="selectAdhanLen('rald','long')">درێژ</button>
+              <button type="button" class="adhan-len-btn" id="adhan-len-rald-short" onclick="selectAdhanLen('rald','short')">کورت</button>
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:6px;">
-          <button id="adhan-play-rald" onclick="previewAdhan('rald')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
-          <button onclick="selectAdhan('rald')" id="adhan-sel-rald" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
+        <div style="display:flex;gap:6px;flex-shrink:0;">
+          <button id="adhan-play-rald" onclick="previewAdhanRow('rald')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
+          <button onclick="selectAdhanRow('rald')" id="adhan-sel-rald" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
         </div>
       </div>
       <div id="adhan-row-peshawa" style="display:flex;align-items:center;justify-content:space-between;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,0.03);">
-        <div style="display:flex;align-items:center;gap:10px;">
+        <div style="display:flex;align-items:center;gap:10px;min-width:0;">
           <div id="adhan-dot-peshawa" style="width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:transparent;flex-shrink:0;"></div>
-          <span style="font-size:14px;">بانگی پێشەوا</span>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+            <span style="font-size:14px;">بانگی پێشەوا</span>
+            <div class="adhan-len-group">
+              <button type="button" class="adhan-len-btn" id="adhan-len-peshawa-long" onclick="selectAdhanLen('peshawa','long')">درێژ</button>
+              <button type="button" class="adhan-len-btn" id="adhan-len-peshawa-short" onclick="selectAdhanLen('peshawa','short')">کورت</button>
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:6px;">
-          <button id="adhan-play-peshawa" onclick="previewAdhan('peshawa')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
-          <button onclick="selectAdhan('peshawa')" id="adhan-sel-peshawa" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
+        <div style="display:flex;gap:6px;flex-shrink:0;">
+          <button id="adhan-play-peshawa" onclick="previewAdhanRow('peshawa')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
+          <button onclick="selectAdhanRow('peshawa')" id="adhan-sel-peshawa" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
         </div>
       </div>
       <div id="adhan-row-abdulbasut" style="display:flex;align-items:center;justify-content:space-between;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,0.03);">
-        <div style="display:flex;align-items:center;gap:10px;">
+        <div style="display:flex;align-items:center;gap:10px;min-width:0;">
           <div id="adhan-dot-abdulbasut" style="width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:transparent;flex-shrink:0;"></div>
-          <span style="font-size:14px;">بانگی عبدالباسط</span>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+            <span style="font-size:14px;">بانگی عبدالباسط</span>
+            <div class="adhan-len-group">
+              <button type="button" class="adhan-len-btn" id="adhan-len-abdulbasut-long" onclick="selectAdhanLen('abdulbasut','long')">درێژ</button>
+              <button type="button" class="adhan-len-btn" id="adhan-len-abdulbasut-short" onclick="selectAdhanLen('abdulbasut','short')">کورت</button>
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:6px;">
-          <button id="adhan-play-abdulbasut" onclick="previewAdhan('abdulbasut')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
-          <button onclick="selectAdhan('abdulbasut')" id="adhan-sel-abdulbasut" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
+        <div style="display:flex;gap:6px;flex-shrink:0;">
+          <button id="adhan-play-abdulbasut" onclick="previewAdhanRow('abdulbasut')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
+          <button onclick="selectAdhanRow('abdulbasut')" id="adhan-sel-abdulbasut" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
         </div>
       </div>
       <div id="adhan-row-abdulaziz" style="display:flex;align-items:center;justify-content:space-between;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,0.03);">
-        <div style="display:flex;align-items:center;gap:10px;">
+        <div style="display:flex;align-items:center;gap:10px;min-width:0;">
           <div id="adhan-dot-abdulaziz" style="width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:transparent;flex-shrink:0;"></div>
-          <span style="font-size:14px;">بانگی عبدالعزیز</span>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+            <span style="font-size:14px;">بانگی عبدالعزیز</span>
+            <div class="adhan-len-group">
+              <button type="button" class="adhan-len-btn" id="adhan-len-abdulaziz-long" onclick="selectAdhanLen('abdulaziz','long')">درێژ</button>
+              <button type="button" class="adhan-len-btn" id="adhan-len-abdulaziz-short" onclick="selectAdhanLen('abdulaziz','short')">کورت</button>
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:6px;">
-          <button id="adhan-play-abdulaziz" onclick="previewAdhan('abdulaziz')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
-          <button onclick="selectAdhan('abdulaziz')" id="adhan-sel-abdulaziz" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
-        </div>
-      </div>
-      <div id="adhan-row-makha2" style="display:flex;align-items:center;justify-content:space-between;border-radius:14px;padding:10px 12px;background:rgba(255,255,255,0.03);">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div id="adhan-dot-makha2" style="width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:transparent;flex-shrink:0;"></div>
-          <span style="font-size:14px;">بانگی مەکە کورت</span>
-        </div>
-        <div style="display:flex;gap:6px;">
-          <button id="adhan-play-makha2" onclick="previewAdhan('makha2')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
-          <button onclick="selectAdhan('makha2')" id="adhan-sel-makha2" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
+        <div style="display:flex;gap:6px;flex-shrink:0;">
+          <button id="adhan-play-abdulaziz" onclick="previewAdhanRow('abdulaziz')" style="background:rgba(255,255,255,0.1);border:none;border-radius:20px;padding:6px 14px;color:#fff;font-family:inherit;cursor:pointer;font-size:14px;min-width:38px;">▶</button>
+          <button onclick="selectAdhanRow('abdulaziz')" id="adhan-sel-abdulaziz" style="background:rgba(229,184,71,0.15);border:none;border-radius:20px;padding:6px 12px;color:#E5B847;font-family:inherit;cursor:pointer;font-size:12px;">هەڵبژێرە</button>
         </div>
       </div>
     </div>
@@ -2624,8 +2668,19 @@ window._fetchTimeout = async function(url, ms){
     peshawa:    'adhan_peshawa.mp3',
     abdulbasut: 'adhan_abdulbasut.mp3',
     abdulaziz:  'adhan_abdulaziz.mp3',
-    makha2:     'adhan_makha2.mp3'
+    makha2:     'adhan_makha2.mp3',
+    // وەشانی کورت (بانگی مەکە کورت = makha2)
+    rald_s:       'adhan_rald_short.mp3',
+    peshawa_s:    'adhan_peshawa_short.mp3',
+    abdulbasut_s: 'adhan_abdulbasut_short.mp3',
+    abdulaziz_s:  'adhan_abdulaziz_short.mp3'
   };
+  // بانگبێژ ← وەشانی درێژ و کورت
+  const ADHAN_BASES = ['makha','rald','peshawa','abdulbasut','abdulaziz'];
+  function adhanBase(k){ if (k === 'makha2') return 'makha'; return String(k || 'makha').replace(/_s$/, ''); }
+  function adhanIsShort(k){ return k === 'makha2' || /_s$/.test(String(k || '')); }
+  function adhanVariant(base, len){ if (len === 'short') return base === 'makha' ? 'makha2' : base + '_s'; return base; }
+  window.adhanBase = adhanBase; window.adhanIsShort = adhanIsShort; window.adhanVariant = adhanVariant;
   const ADHAN_PREVIEW_URL = {
     makha:      'https://server10.mp3quran.net/makha/001.mp3',
     rald:       'https://server6.mp3quran.net/kurdi/001.mp3',
@@ -3921,7 +3976,7 @@ window._fetchTimeout = async function(url, ms){
   // ==================== هاوکاری بێدەنگ لەگەڵ bang-notifications ====================
 
   var CITY_KEYS  = ['sulaymaniyah','erbil','duhok','kirkuk','halabja','zakho','kifri','rania','koya','qaladze','bardarash','mosul','darbandikhan','kalar','akre','daquq','makhmur','mandali','qarahanjir','duzkhurmatoo','penjwen'];
-  var ADHAN_KEYS = ['makha','rald','peshawa','abdulbasut','abdulaziz','makha2'];
+  var ADHAN_KEYS = ['makha','rald','peshawa','abdulbasut','abdulaziz'];
 
   function refreshCityUI(){
     CITY_KEYS.forEach(function(k){
@@ -3942,7 +3997,11 @@ window._fetchTimeout = async function(url, ms){
       var dot=document.getElementById('adhan-dot-'+k);
       var sel=document.getElementById('adhan-sel-'+k);
       if(!row||!dot||!sel) return;
-      var on=k===selectedAdhan;
+      var on=k===adhanBase(selectedAdhan);
+      var isShort=adhanIsShort(selectedAdhan);
+      var lb=document.getElementById('adhan-len-'+k+'-long'), sb=document.getElementById('adhan-len-'+k+'-short');
+      if(lb) lb.classList.toggle('on', on && !isShort);
+      if(sb) sb.classList.toggle('on', on && isShort);
       row.style.background=on?'rgba(229,184,71,0.1)':'rgba(255,255,255,0.03)';
       dot.style.background=on?'var(--gold)':'transparent';
       sel.style.background=on?'var(--gold)':'rgba(229,184,71,0.15)';
@@ -4104,7 +4163,7 @@ window._fetchTimeout = async function(url, ms){
     var player = _globalAdhanPlayer;
 
     function setBtn(k, icon) {
-      var btn = document.getElementById('adhan-play-' + k);
+      var btn = document.getElementById('adhan-play-' + adhanBase(k));
       if(btn) btn.textContent = icon;
     }
 
@@ -4168,10 +4227,25 @@ window._fetchTimeout = async function(url, ms){
     }
   };
 
+  // ▶ لە هەر ڕیزێک: ئەگەر ئەم بانگبێژە هەڵبژێردراوە، هەمان درێژی/کورتی لێدەدات، دەنا درێژ
+  window.previewAdhanRow = function(base){
+    var len = (adhanBase(selectedAdhan) === base && adhanIsShort(selectedAdhan)) ? 'short' : 'long';
+    window.previewAdhan(adhanVariant(base, len));
+  };
+  // دوگمەی «هەڵبژێرە» — هەمان درێژی/کورتیی ئێستا دەپارێزێت
+  window.selectAdhanRow = function(base){
+    window.selectAdhan(adhanVariant(base, adhanIsShort(selectedAdhan) ? 'short' : 'long'));
+  };
+  // دوگمەکانی «درێژ / کورت»
+  window.selectAdhanLen = function(base, len){
+    window.selectAdhan(adhanVariant(base, len));
+  };
+
   // هەڵبژاردنی دەنگ + دووبارە چالاككردنی بانگەکان بەدەنگی نوێ
   window.selectAdhan = async function(key){
     selectedAdhan = key;
     localStorage.setItem('sel_adhan', key);
+    refreshAdhanUI();
     // دووبارە خشتەکردنی بانگەکان بەدەنگی نوێ
     if(typeof window.initBangNotifications === 'function'){
       try { await window.initBangNotifications(); } catch(e){}
@@ -4392,9 +4466,12 @@ window._fetchTimeout = async function(url, ms){
     var map = L.map('mosque-map',{zoomControl:true}).setView([35.5650, 45.4357], 14);
     window._mosqueMap = map;
 
-    // تایلی ماپ — OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-      attribution:'© OpenStreetMap',maxZoom:19
+    // تایلی ماپ — Esri World Street Map
+    // tile.openstreetmap.org ئەپەکانی مۆبایل بلۆک دەکات (403)، و CARTO ئێستا API key دەوێت،
+    // بۆیە Esri بەکاردێت کە بێ کلیل کار دەکات.
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles © Esri — Esri, HERE, Garmin, OpenStreetMap contributors',
+      maxZoom: 19
     }).addTo(map);
 
     // ئایکۆنی مزگەوت — سادە و جوان
@@ -5858,7 +5935,9 @@ window.initBangNotifications = async function() {
 
     var ADHAN_FILES = {
       makha:'adhan_makha', rald:'adhan_rald', peshawa:'adhan_peshawa',
-      abdulbasut:'adhan_abdulbasut', abdulaziz:'adhan_abdulaziz', makha2:'adhan_makha2'
+      abdulbasut:'adhan_abdulbasut', abdulaziz:'adhan_abdulaziz', makha2:'adhan_makha2',
+      rald_s:'adhan_rald_short', peshawa_s:'adhan_peshawa_short',
+      abdulbasut_s:'adhan_abdulbasut_short', abdulaziz_s:'adhan_abdulaziz_short'
     };
     var _selKey = localStorage.getItem('sel_adhan') || 'makha2';
     var _snd = ADHAN_FILES[_selKey] || 'adhan_makha2';
@@ -5926,6 +6005,9 @@ window.initBangNotifications = async function() {
 
     let _pnDisabled = {};
     try { const _s = localStorage.getItem('pn_disabled'); if(_s) _pnDisabled = JSON.parse(_s); } catch(ee){}
+    // شاشەی گەورەی بانگ (Native — تەنها ئەندرۆید). ئەگەر هەبێت، دوگمەی وەستاندن لەوێدایە
+    const _AdhanAlarm = (window.Capacitor.getPlatform() === 'android' && window.Capacitor.Plugins && window.Capacitor.Plugins.AdhanAlarm) || null;
+    const _fullScreenOn = localStorage.getItem('adhan_fullscreen') !== '0';
 
     const now = new Date();
     const prayerNames = ["بەیانی", "ڕۆژهەڵاتن", "نیوەڕۆ", "عەسر", "مەغریب", "عیشا"];
@@ -6017,10 +6099,15 @@ window.initBangNotifications = async function() {
             }
 
             const isSilent = !!_pnDisabled[idx];
+            const _dz = window._adhanDhikrFor ? window._adhanDhikrFor(idx, day) : '';
             scheduled.push({
                 id: (day * 10) + idx + 1,
                 title: `🕌 کاتی بانگی ${prayerNames[idx]}`,
                 body: `ئێستا کاتی نوێژی ${prayerNames[idx]} هات`,
+                // دەقی گەورە (کاتێک ئاگادارکردنەوەکە دەکرێتەوە) — زیکر یان فەرموودە
+                largeBody: `ئێستا کاتی نوێژی ${prayerNames[idx]} هات 🕌\n\n${_dz}`,
+                summaryText: 'بانگی نوێژەکان',
+                ...(!_AdhanAlarm && { actionTypeId: 'ADHAN_ACTIONS' }),
                 // ─── دەنگ: ئەندرۆید بەبێ .mp3، iOS بە .mp3 ───
                 sound: isSilent ? null : (
                     window.Capacitor.getPlatform() === 'android' ? _snd : _snd + '.mp3'
@@ -6080,6 +6167,28 @@ window.initBangNotifications = async function() {
         }
     } catch(dErr) { console.warn('dhikr reminder error:', dErr); }
 
+    // 🕌 شاشەی گەورەی بانگ — هەمان کاتی بانگەکان (بێدەنگەکان نا)
+    if (_AdhanAlarm) {
+        try {
+            const _alarms = !_fullScreenOn ? [] : scheduled
+                .filter(n => n.extra && n.extra.prayerIdx != null && !n.extra.isPreReminder && !n.extra.isSunrise && !n.extra.isDhikrReminder && !n.extra.isTest && !n.silent)
+                .map(n => ({
+                    id: n.id, notifId: n.id, at: n.schedule.at.getTime(),
+                    prayerIdx: n.extra.prayerIdx, name: n.extra.prayerName,
+                    dhikr: String(n.largeBody || '').split('\n\n').slice(1).join('\n\n')
+                }));
+            await _AdhanAlarm.schedule({ alarms: _alarms });
+            // ئەندرۆید ١٤+: مۆڵەتی شاشەی تەواو — تەنها یەک جار داوا دەکرێت
+            if (_alarms.length && !localStorage.getItem('fsi_asked_v1') && !document.querySelector('._wizOverlay')) {
+                const _g = await _AdhanAlarm.canUseFullScreen();
+                if (_g && _g.granted === false && window._askFullScreenPermission) {
+                    localStorage.setItem('fsi_asked_v1', '1');
+                    window._askFullScreenPermission();
+                }
+            }
+        } catch(fsErr) { console.warn('AdhanAlarm error:', fsErr); }
+    }
+
     if (scheduled.length > 0) {
         await LocalNotifications.schedule({ notifications: scheduled });
         console.log(`✅ ${scheduled.length} بانگ چالاک کران.`);
@@ -6099,7 +6208,135 @@ window.initBangNotifications = async function() {
     }
   }
 };
+
+// ==================== شاشەی گەورەی بانگ + دوگمەی وەستاندن ====================
+// زیکر و فەرموودە کە لە ناو ئاگادارکردنەوەی بانگ و شاشەی بانگدا پیشان دەدرێن
+window._ADHAN_DHIKRS = [
+  'اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ (رواه البخاري)',
+  '«إِذَا سَمِعْتُمُ الْمُؤَذِّنَ فَقُولُوا مِثْلَ مَا يَقُولُ» (رواه مسلم)',
+  '«الدُّعَاءُ لَا يُرَدُّ بَيْنَ الْأَذَانِ وَالْإِقَامَةِ» (رواه الترمذي وأبو داود)',
+  '﴿إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا﴾ [النساء: ١٠٣]',
+  '﴿وَأَقِمِ الصَّلَاةَ لِذِكْرِي﴾ [طه: ١٤]',
+  'رَضِيتُ بِاللَّهِ رَبًّا، وَبِمُحَمَّدٍ رَسُولًا، وَبِالْإِسْلَامِ دِينًا (رواه مسلم)',
+  'سُئِلَ النَّبِيُّ ﷺ: أَيُّ الْعَمَلِ أَحَبُّ إِلَى اللَّهِ؟ قَالَ: «الصَّلَاةُ عَلَى وَقْتِهَا» (متفق عليه)'
+];
+window._adhanDhikrFor = function(idx, day) {
+  if (idx === 0) return 'الصَّلَاةُ خَيْرٌ مِنَ النَّوْمِ 🌙\n\n' + window._ADHAN_DHIKRS[(day || 0) % window._ADHAN_DHIKRS.length];
+  var list = window._ADHAN_DHIKRS;
+  return list[((day || 0) * 5 + idx) % list.length];
+};
+
+// داواکردنی مۆڵەتی شاشەی تەواو (ئەندرۆید ١٤+) بە ڕوونکردنەوەی کوردی
+window._askFullScreenPermission = function() {
+  var AA = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.AdhanAlarm;
+  if (!AA || document.getElementById('fsiAsk')) return;
+  var ov = document.createElement('div');
+  ov.id = 'fsiAsk';
+  ov.style.cssText = 'position:fixed;inset:0;z-index:10070;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;';
+  ov.innerHTML = '<div style="background:#1a1d26;border-radius:20px;padding:24px 20px;max-width:340px;width:100%;border:1px solid rgba(229,184,71,0.3);font-family:inherit;direction:rtl;text-align:center;">'
+    + '<div style="font-size:34px;margin-bottom:8px;">🕌</div>'
+    + '<div style="font-size:16px;font-weight:800;color:#E5B847;margin-bottom:10px;">شاشەی گەورەی بانگ</div>'
+    + '<div style="font-size:13px;color:#ccc;line-height:1.8;margin-bottom:16px;">بۆ ئەوەی لە کاتی بانگدا شاشەیەکی گەورە بە دوگمەی <b style="color:#fff;">وەستاندن</b> دەربکەوێت، لە پەڕەی داهاتوودا ئەم ڕێگاپێدانە <b style="color:#4ade80;">چالاک بکە</b>، پاشان ◀ گەڕانەوە دابگرە.</div>'
+    + '<button id="fsiGo" style="width:100%;padding:12px;background:linear-gradient(135deg,#E5B847,#c9982b);border:none;border-radius:12px;color:#0a0c12;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:8px;">⚙️ چالاککردن</button>'
+    + '<button id="fsiNo" style="width:100%;padding:10px;background:rgba(255,255,255,0.07);border:none;border-radius:12px;color:#999;font-family:inherit;font-size:13px;cursor:pointer;">دواتر</button>'
+    + '</div>';
+  document.body.appendChild(ov);
+  document.getElementById('fsiGo').onclick = function(){ ov.remove(); try { AA.openFullScreenSettings(); } catch(e) {} };
+  document.getElementById('fsiNo').onclick = function(){ ov.remove(); };
+};
+
+(function _adhanScreenSetup(){
+  var LN = (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.LocalNotifications) || null;
+  var AppP = (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App) || null;
+  var NAMES = ["بەیانی", "ڕۆژهەڵاتن", "نیوەڕۆ", "عەسر", "مەغریب", "عیشا"];
+
+  function stopNativeAdhan(id) {
+    // سڕینەوەی ئاگادارکردنەوەکە دەنگی بانگەکەش دەوەستێنێت (دەنگەکە هی کەناڵی ئاگادارکردنەوەیە)
+    try { if (LN && id != null) LN.cancel({ notifications: [{ id: id }] }); } catch(e) {}
+    try { if (LN && LN.removeAllDeliveredNotifications && id == null) LN.removeAllDeliveredNotifications(); } catch(e) {}
+    try { if (window._stopAdhanNow) window._stopAdhanNow(); } catch(e) {}
+  }
+
+  window._showAdhanScreen = function(prayerIdx, notifId, dhikr) {
+    var old = document.getElementById('adhanFullScreen'); if (old) old.remove();
+    var name = NAMES[prayerIdx] || '';
+    var now = new Date();
+    var hh = now.getHours() % 12 || 12, mm = String(now.getMinutes()).padStart(2, '0');
+    var txt = (dhikr || window._adhanDhikrFor(prayerIdx, now.getDate())).replace(/\n/g, '<br>');
+    var ov = document.createElement('div');
+    ov.id = 'adhanFullScreen';
+    ov.style.cssText = 'position:fixed;inset:0;z-index:2147483000;background:radial-gradient(circle at 50% 20%,#2a2208 0%,#0a0b0f 65%);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,16px) + 40px) 22px calc(env(safe-area-inset-bottom,16px) + 28px);box-sizing:border-box;direction:rtl;font-family:inherit;color:#f0ebe0;text-align:center;';
+    ov.innerHTML =
+      '<div>'
+      + '<div style="font-size:64px;line-height:1;margin-bottom:14px;">🕌</div>'
+      + '<div style="font-size:15px;color:rgba(255,255,255,0.6);">کاتی بانگی</div>'
+      + '<div style="font-size:40px;font-weight:900;color:#E5B847;line-height:1.3;">' + name + '</div>'
+      + '<div style="font-size:28px;font-weight:800;color:#FFE066;direction:ltr;margin-top:4px;">' + hh + ':' + mm + '</div>'
+      + '</div>'
+      + '<div style="background:rgba(229,184,71,0.08);border:1px solid rgba(229,184,71,0.3);border-radius:18px;padding:18px 16px;font-size:17px;line-height:2;color:#fff;max-width:440px;width:100%;box-sizing:border-box;">' + txt + '</div>'
+      + '<div style="width:100%;max-width:440px;">'
+      + '<button id="adhanFsStop" style="width:100%;padding:18px;border:none;border-radius:40px;background:linear-gradient(135deg,#E5B847,#c9982b);color:#0A0C12;font-family:inherit;font-size:19px;font-weight:900;cursor:pointer;box-shadow:0 6px 24px rgba(229,184,71,0.45);margin-bottom:12px;">⏹ وەستاندنی بانگ</button>'
+      + '<button id="adhanFsClose" style="width:100%;padding:13px;border:1px solid rgba(255,255,255,0.15);border-radius:40px;background:transparent;color:#bbb;font-family:inherit;font-size:15px;cursor:pointer;">داخستن</button>'
+      + '</div>';
+    document.body.appendChild(ov);
+    document.getElementById('adhanFsStop').onclick = function(){ stopNativeAdhan(notifId); ov.remove(); };
+    document.getElementById('adhanFsClose').onclick = function(){ ov.remove(); };
+  };
+
+  if (!LN || !LN.addListener) return;
+  var isAndroid = false;
+  try { isAndroid = window.Capacitor.getPlatform() === 'android'; } catch(e) {}
+
+  // دوگمەی «وەستاندنی بانگ» لە ناو ئاگادارکردنەوەکەدا
+  try {
+    if (LN.registerActionTypes) {
+      LN.registerActionTypes({ types: [{
+        id: 'ADHAN_ACTIONS',
+        actions: [{ id: 'stop', title: '⏹ وەستاندنی بانگ', destructive: true }]
+      }] });
+    }
+  } catch(e) {}
+
+  function isAdhan(n) {
+    var x = n && n.extra;
+    return !!(x && x.prayerIdx != null && !x.isPreReminder && !x.isSunrise && !x.isDhikrReminder && !x.isTest);
+  }
+
+  // کلیک لە ئاگادارکردنەوە یان دوگمەی وەستاندن
+  LN.addListener('localNotificationActionPerformed', function(ev){
+    var n = ev && ev.notification;
+    if (!isAdhan(n)) return;
+    if (ev.actionId === 'stop') {
+      stopNativeAdhan(n.id);
+      // ئەپەکە بگەڕێنەرەوە باکگراوند (تەنها ئەندرۆید)
+      try { if (isAndroid && AppP && AppP.minimizeApp) setTimeout(function(){ AppP.minimizeApp(); }, 300); } catch(e) {}
+      return;
+    }
+    window._showAdhanScreen(n.extra.prayerIdx, n.id, n.largeBody ? String(n.largeBody).split('\n\n').slice(1).join('\n\n') : null);
+  });
+
+  // ئەگەر ئەپەکە کراوە بوو لە کاتی بانگدا، شاشە گەورەکە ڕاستەوخۆ پیشان بدە
+  LN.addListener('localNotificationReceived', function(n){
+    if (!isAdhan(n)) return;
+    window._showAdhanScreen(n.extra.prayerIdx, n.id, n.largeBody ? String(n.largeBody).split('\n\n').slice(1).join('\n\n') : null);
+  });
+})();
 // هەر کاتێک ئەپەکە کرایەوە، خۆی بانگەکان نوێ دەکاتەوە
+
+// وێنەیەکی ساختەی پەڕەی باتری — بۆ ئەوەی بەکارهێنەر بزانێت کام هەڵبژاردە دابگرێت
+window._batteryGuideMock = function() {
+  return '<div style="background:#f4f4f6;border-radius:14px;padding:10px 12px;margin:0 0 16px;direction:ltr;text-align:left;font-family:Arial,sans-serif;">'
+    + '<div style="font-size:11px;color:#8a8fa8;font-weight:700;margin-bottom:6px;">Battery saver</div>'
+    + '<div style="position:relative;background:#e9f9ee;border:2.5px solid #22c55e;border-radius:10px;padding:8px 10px;margin-bottom:6px;box-shadow:0 0 0 4px rgba(34,197,94,0.18);">'
+    +   '<div style="font-size:13px;font-weight:800;color:#111;">No restrictions</div>'
+    +   '<div style="font-size:10px;color:#555;">Unrestricted · بلا قيود</div>'
+    +   '<div style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:22px;">👈</div>'
+    + '</div>'
+    + '<div style="padding:5px 10px;font-size:12px;color:#aaa;">Battery saver (recommended)</div>'
+    + '<div style="padding:5px 10px;font-size:12px;color:#aaa;">Restrict background apps</div>'
+    + '<div style="margin-top:8px;font-size:12px;color:#16a34a;font-weight:800;direction:rtl;text-align:right;">✅ ئەمە هەڵبژێرە، پاشان ◀ گەڕانەوە</div>'
+    + '</div>';
+};
 
 // ==================== Permission Onboarding Wizard — زنجیرەی ئاسانکاری مۆڵەتەکان ====================
 // کاتێک بەکارهێنەر یەکەم جار ئەپەکە دادەبەزێنێت، دوو هەنگاو بە دووای یەکدا پیشان دەدرێن:
@@ -6194,11 +6431,12 @@ function _showBatteryStep(stepNum, stepTotal) {
         <div style="background:rgba(46,125,82,0.12);border:1.5px solid #2E7D52;border-radius:12px;padding:12px;margin-bottom:16px;">
           <div style="font-size:13px;color:#4ade80;font-weight:800;margin-bottom:4px;">👇 لە پەڕەی داهاتوودا:</div>
           <div style="font-size:12px;color:#ddd;line-height:1.9;">
-            ١. کرتە لەسەر <b style="color:#4ade80;">«No restrictions»</b> بکە (یەکەم هەڵبژاردە)<br>
+            ١. کرتە لەسەر <b style="color:#4ade80;">یەکەم هەڵبژاردە لە سەرەوە</b> بکە<br>
             ٢. دوای دیاریکردنی، دووگمەی گەڕانەوە (◀) لێدە<br>
             ٣. خۆکارانە دەگەڕێیتەوە بۆ ئێرە بۆ هەنگاوی داهاتوو
           </div>
         </div>
+        ${window._batteryGuideMock ? window._batteryGuideMock() : ''}
         <button id="_wizBattGo" style="width:100%;padding:12px;background:linear-gradient(135deg,#E5B847,#c9982b);border:none;border-radius:12px;color:#0a0c12;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:8px;">
           ⚙️ کردنەوەی سێتینگ
         </button>
